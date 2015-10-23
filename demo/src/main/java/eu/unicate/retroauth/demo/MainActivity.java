@@ -14,13 +14,21 @@ import eu.unicate.retroauth.AuthAccountManager;
 import eu.unicate.retroauth.AuthRestAdapter;
 import eu.unicate.retroauth.demo.auth.github.model.Email;
 import eu.unicate.retroauth.interceptors.TokenInterceptor;
+import retrofit.AuthRxJavaCallAdapterFactory;
+import retrofit.CallAdapter;
 import retrofit.Callback;
+import retrofit.GsonConverterFactory;
 import retrofit.RestAdapter;
+import retrofit.Retrofit;
 import retrofit.RetrofitError;
+import retrofit.RxJavaCallAdapterFactory;
 import retrofit.client.Response;
+import rx.Observable;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.Subscriptions;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
 		AuthRestAdapter restAdapter = new AuthRestAdapter.Builder()
 				.setEndpoint("https://api.github.com")
 				.setLogLevel(RestAdapter.LogLevel.FULL)
+				.build();
+
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl("https://api.github.com")
+				.addConverterFactory(GsonConverterFactory.create())
+				.addCallAdapterFactory(AuthRxJavaCallAdapterFactory.create())
 				.build();
 
 		// create the service with an activity, a token interceptor and the service interface you want to create
@@ -171,6 +185,15 @@ public class MainActivity extends AppCompatActivity {
 	private void showError(Throwable error) {
 		Log.e("TAG", "Error", error);
 		Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+	}
+
+	private void test() {
+		Observable.create(new Observable.OnSubscribe<Object>() {
+			@Override
+			public void call(Subscriber<? super Object> subscriber) {
+				subscriber.add(Subscriptions.create());
+			}
+		})
 	}
 
 }
