@@ -25,6 +25,7 @@ import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * This class invokes authenticated requests
@@ -86,6 +87,6 @@ final class AuthInvoker {
 				subscriber.onNext(true);
 				subscriber.onCompleted();
 			}
-		});
+		}).subscribeOn(Schedulers.computation());
 	}
 }

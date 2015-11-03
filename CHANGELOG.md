@@ -2,8 +2,11 @@
 
 * Demo App:
   * Added Github authentication as an example
+  * Permission GET_ACCOUNTS, MANAGE_ACCOUNTS, USE_CREDENTIALS, AUTHENTICATE_ACCOUNTS are now limited to APIs below 23 (No Runtime Permissions to ask the user for anymore)
 * Dependency Updates:
-  * appcompat 23.0.1
+  * appcompat 23.1.0
+  * (Demo App:) rxandroid 1.0.1
+
 
 ## 1.0.3 (2015-08-29)
 

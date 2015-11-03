@@ -1,9 +1,9 @@
 # The simple way of calling authenticated requests in retrofit style
-[![Build Status](https://travis-ci.org/Unic8/retroauth.svg?branch=master)](https://travis-ci.org/Unic8/retroauth)
+[![Build Status](https://travis-ci.org/andretietz/retroauth.svg?branch=master)](https://travis-ci.org/andretietz/retroauth)
 ## Dependencies
 * [Retrofit](https://github.com/square/retrofit) 1.9.0
 * [RxJava](https://github.com/ReactiveX/RxJava) 1.0.14
-* appcompat-v7: 23.0.0
+* appcompat-v7: 23.1.0
 
 Min SDK Version: 9
 

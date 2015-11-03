@@ -16,9 +16,11 @@
 
 package eu.unicate.retroauth.strategies;
 
+import android.util.Log;
 import android.util.SparseArray;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -96,14 +98,14 @@ public class LockingStrategy extends RetryAndInvalidateStrategy {
 		return
 				// lock the semaphore
 				lockRequest()
-						.flatMap(new Func1<Boolean, Observable<?>>() {
+						.concatMap(new Func1<Boolean, Observable<?>>() {
 							@Override
 							public Observable<?> call(Boolean wasWaiting) {
 								return cancelIfRequired(wasWaiting);
 							}
 						})
 								// execute the request
-						.flatMap(new Func1<Object, Observable<T>>() {
+						.concatMap(new Func1<Object, Observable<T>>() {
 							@Override
 							public Observable<T> call(Object o) {
 								return request;
