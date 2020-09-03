@@ -1,3 +1,82 @@
+## 3.0.0 ()
+* Renaming Token -> Credentials
+* Converted the project to Kotlin
+* When getting the credentials, it CAN automatically read user data items, which are defined in the CredentialType
+* API changes
+  * Solving problem with multiple authenticated requests.
+  * Renamed Provider to CredentialProvider and added functionality
+  * Better separation of OwnerStorage and CredentialStorage
+* Fixed Demo app which is using Facebook with [scribe](https://github.com/scribejava/scribejava)
+* Added functionalities to refresh the credentials before the authenticated call is called.
+* Renaming TokenProvider to Authenticator
+* Callback method when the account is removed from the Android AccountManager
+
+## 2.3.1 (2018-01-15)
+* Updating release script
+* Fixing Exception when Exception is thrown during the actual call (was always AuthenticationCanceledException)
+* Renamed core project to retroauth instead of retroauth-core
+
+## 2.3.0 (2017-09-07)
+* Renaming ContextManager to ActivityManager and focusing on providing a Nullable Activity. No Context will be provided anymore! Due to this change this is a breaking change.
+* Doesn't use ContentProvider workaround for getting the Application Object. It seemed nice but was difficult when using multiple processes.
+
+## 2.2.2 (2017-08-21)
+* Adding the hashCode method for the AndroidTokenType, so that the locking is actually working.
+
+## 2.2.1 (2017-06-06)
+* If Request-Locking is enabled, it's locking (only one request at once) requests over multiple retroauth instances.
+
+## 2.2.0 (2017-05-22)
+* Removed Deprecated Methods
+* Changes in the CallAdapter implementation update to retrofit 2.3.0
+
+## 2.1.6 (2017-01-09)
+* Added functionalities to switch accounts easily
+
+## 2.1.5 (2017-01-05)
+* Fixed a bug in the ContextManager. Activity Stack was used a bit "optimistic"
+
+## 2.1.4 (2016-08-24)
+* retroauth-android
+  * set fixed appcompat minimum version to 22.1.0
+
+## 2.1.3 (2016-08-16)
+* retroauth-android
+  * added robolectric to enhance test coverage
+  * bugfix in ContextManager 
+
+## 2.1.2 (2016-08-02)
+* retroauth-android:
+  * Authentication can be finalized without finishing the activity itself
+  * Adding and removing accounts using the AuthAccountManager can have some optional callbacks, which notifies you, when the system created/removed the account
+
+## 2.1.1 (2016-07-27)
+* retroauth-core:
+  * Removed method "createType" from TokenStorage
+  * Created TokenTypeFactory, which can be passed optionally into the AuthenticationHandler
+
+## 2.1.0 (2016-07-25)
+* retroauth-core:
+  * breaking improvement
+    * Switching from String[] to int[], which is easier to handle on android
+* retroauth-android:
+  * Some of the methods of the AuthAccountManager don't need a Context anymore
+  * removed method "getActiveUserToken" from AuthAccountManager, 'cause it's not necessary anymore
+* Update dependencies
+  * retrofit 2.1.0 (retroauth-core)
+  * appcompat 24.1.1 (retroauth-android)
+
+## 2.0.0 (2016-06-15)
+
+* Complete rebuild, to be able to work with retrofit2
+  * Removed rxjava as dependency
+  * Works as well with plain java
+  * added retroauth-android library (for android accountmanager needs)
+  * added java demo (google, javafx)
+  * added android demo (google, webview)
+  * No Context required for creating the Retrofit object
+
+
 ## 1.0.4 (2015-11-02)
 
 * Demo App:
@@ -13,7 +92,7 @@
 
 ## 1.0.3 (2015-08-29)
 
-* Storing multiple tokens in the AuthenticationActivity
+* Storing multiple credentials in the AuthenticationActivity
 * Adding some sequence diagrams for a better understanding
 * Bugfixes:
   * Creating an instance of the LockingStrategy required a protected class as argument. fixed this.
